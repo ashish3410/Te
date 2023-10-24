@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature_converter</title>
+    <style>
+        body {
+            background-image: url('https://wallpaperset.com/w/full/a/a/a/344403.jpg');
+            height: 100%;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: aqua;
+            padding: 44px;
+            display: flex;
+            margin: auto;
+            justify-content: center;
+            font-size: 40px;
+            text-shadow:4px 4px 4px rgb(123, 0, 255);
+
+        }
+
+        h2 {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: aqua;
+            margin-left:0px;
+        }
+
+        h3 {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: aqua;
+            font-size: 33px;
+            margin-top: 175px;
+            margin-left:-66px;
+        }
+
+        .container1 {
+            padding: 12px;
+            display: flex;
+            margin: auto;
+            justify-content: center;
+        }
+
+        .box1 {
+            height: 400px;
+            width: 800px;
+            background-color: rgb(11, 200, 188);
+            border-radius: 36px;
+            border: 2px solid blue;
+            display: flex;
+            margin: auto;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 4px 4px 4px blue;
+        }
+
+        .placeholder input {
+            position: absolute;
+            top: 240px;
+            left:500px;
+            height: 51px;
+            width: 330px;
+            border-radius: 12px;
+            font-size: 19px
+        }
+
+        #select {
+            position: absolute;
+            top: 240px;
+            left: 840px;
+            height: 51px;
+            width: 200px;
+            border-radius: 12px;
+            font-size: 19px
+        }
+         .placeholder2 input {
+            position: absolute;
+            top:380px;
+            left:500px;
+            height: 51px;
+            width: 330px;
+            border-radius: 12px;
+            font-size: 19px
+         }
+         .placeholder2 #select{
+            position: absolute;
+            top:380px;
+            left: 840px;
+            height: 51px;
+            width: 200px;
+            border-radius: 12px;
+            font-size: 19px
+         }
+    </style>
+</head>
+
+<body>
+    <h1>Temperature
+        Converter</h1>
+    <div class="container1">
+        <div class="box1">
+            <h2>From</h2>
+            <h3>To</h3>
+        </div>
+    </div>
+    <div class="placeholder">
+        <input type="number" placeholder="Enter Temperature">
+        <select name="chooose" id="select">
+            <option value="temperature-type"> &deg;Celsius</option>
+
+            <option value="temperature-type"> &deg;Fahrenheit</option>
+
+            <option value="temperature-type">Kelvin</option>
+        </select>
+    </div>
+    <div class="placeholder2">
+
+        <input type="number" placeholder="Result">
+        <select name="chooose" id="select">
+            <option value="temperature-type"> &deg;Celsius</option>
+
+            <option value="temperature-type"> &deg;Fahrenheit</option>
+
+            <option value="temperature-type">Kelvin</option>
+        </select>
+
+
+    </div>
+    <script>
+        document.getElementById('inputTemperature').addEventListener('input', convertTemperature);
+        document.getElementById('selectFrom').addEventListener('change', convertTemperature);
+        document.getElementById('selectTo').addEventListener('change', convertTemperature);
+
+        function convertTemperature() {
+            var inputTemperature = parseFloat(document.getElementById('inputTemperature').value);
+            var selectFrom = document.getElementById('selectFrom').value;
+            var selectTo = document.getElementById('selectTo').value;
+
+            var result;
+            switch (selectFrom) {
+                case 'celsius':
+                    result = convertFromCelsius(inputTemperature, selectTo);
+                    break;
+                case 'fahrenheit':
+                    result = convertFromFahrenheit(inputTemperature, selectTo);
+                    break;
+                case 'kelvin':
+                    result = convertFromKelvin(inputTemperature, selectTo);
+                    break;
+                default:
+                    result = "Invalid selection";
+            }
+
+            document.getElementById('result').value = result.toFixed(2);
+        }
+
+        function convertFromCelsius(value, to) {
+            switch (to) {
+                case 'celsius':
+                    return value;
+                case 'fahrenheit':
+                    return (value * 9 / 5) + 32;
+                case 'kelvin':
+                    return value + 273.15;
+                default:
+                    return "Invalid selection";
+            }
+        }
+
+        function convertFromFahrenheit(value, to) {
+            switch (to) {
+                case 'celsius':
+                    return (value - 32) * 5 / 9;
+                case 'fahrenheit':
+                    return value;
+                case 'kelvin':
+                    return (value - 32) * 5 / 9 + 273.15;
+                default:
+                    return "Invalid selection";
+            }
+        }
+
+        function convertFromKelvin(value, to) {
+            switch (to) {
+                case 'celsius':
+                    return value - 273.15;
+                case 'fahrenheit':
+                    return (value - 273.15) * 9 / 5 + 32;
+                case 'kelvin':
+                    return value;
+                default:
+                    return "Invalid selection";
+            }
+        }
+    </script>
+
+   </body> 
+   </html>
